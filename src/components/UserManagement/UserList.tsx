@@ -192,71 +192,73 @@ const UserList: React.FC<UserListProps> = ({
         <div className="flex gap-4">
           <button
             onClick={openMultipleAddressesModal}
-            className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg flex items-center gap-2"
+            className="purple-button text-white px-4 py-2 rounded-lg flex items-center gap-2 hover-lift"
           >
             View Users with Multiple Addresses
           </button>
           <button
             onClick={onCreateUser}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2"
+            className="add-button text-white px-4 py-2 rounded-lg flex items-center gap-2 hover-lift"
           >
             <Plus size={20} /> Add User
           </button>
         </div>
       </div>
 
-      {/* Filters */}
-      <div className="bg-white p-6 border border-gray-200 rounded-lg shadow-sm space-y-4">
-        <div className="flex flex-col md:flex-row gap-4">
+      {/* Search & Filters */}
+      <div className="modern-card p-6 rounded-2xl">
+        <div className="flex flex-col lg:flex-row gap-4 items-center">
+          {/* Search */}
           <div className="flex-1 relative">
-            <Search size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <Search size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
             <input
               type="text"
               placeholder="Search users..."
               value={searchInput}
               onChange={e => setSearchInput(e.target.value)}
               onKeyDown={handleSearchKeyDown}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              className="modern-input w-full pl-12 pr-4 py-3 rounded-xl focus:outline-none"
             />
           </div>
-        </div>
-
-        <div className="flex flex-col md:flex-row items-center gap-4">
-          <input
-            type="text"
-            value={ageInput}
-            maxLength={2}
-            onChange={e => setAgeInput(e.target.value)}
-            placeholder="Enter minimum age"
-            className="w-full md:w-64 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-          />
-          <input
-            type="text"
-            value={cityInput}
-            onChange={e => setCityInput(e.target.value)}
-            placeholder="Enter city"
-            className="w-full md:w-64 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-          />
-          <button
-            onClick={handleApplyFilter}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
-          >
-            Apply Filter
-          </button>
-          {(filters.min_age || filters.city) && (
+          
+          {/* Filters */}
+          <div className="flex gap-3 items-center">
+            <input
+              type="text"
+              value={ageInput}
+              maxLength={2}
+              onChange={e => setAgeInput(e.target.value)}
+              placeholder="Min age"
+              className="modern-input w-24 px-3 py-3 rounded-xl focus:outline-none text-center"
+            />
+            <input
+              type="text"
+              value={cityInput}
+              onChange={e => setCityInput(e.target.value)}
+              placeholder="City"
+              className="modern-input w-32 px-3 py-3 rounded-xl focus:outline-none"
+            />
             <button
-              onClick={handleClearFilter}
-              className="text-sm text-blue-600 underline"
+              onClick={handleApplyFilter}
+              className="modern-button text-white px-4 py-3 rounded-xl hover-lift"
             >
-              Clear Filter
+              Filter
             </button>
-          )}
+            {(filters.min_age || filters.city) && (
+              <button
+                onClick={handleClearFilter}
+                className="text-red-500 hover:text-red-700 px-3 py-3 rounded-xl hover:bg-red-50 transition-all"
+              >
+                Clear
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
       {/* Count */}
       {stats && (
-        <div className="text-sm text-gray-600">
+        <div className="text-sm text-white font-medium">
           Showing {stats.totalCount} users | Avg Age: {stats?.averageAge?.toFixed(1)}
         </div>
       )}

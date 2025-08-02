@@ -71,52 +71,67 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen flex bg-gray-50">
+    <div className="min-h-screen flex">
       
       {/* Sidebar */}
-      <div className="w-64 bg-white shadow-md h-screen p-4 sticky top-0 flex flex-col space-y-4">
-        {hasAccess('users') && (
+      <div className="w-72 glass-dark h-screen p-6 sticky top-0 flex flex-col">
+        <div className="mb-8">
+          <h1 className="text-2xl font-bold text-white mb-2">🌿 DataFlow</h1>
+          <p className="text-gray-300 text-sm">Management Suite</p>
+        </div>
+        
+        <nav className="flex-1 space-y-2">
+          {hasAccess('users') && (
+            <button
+              onClick={() => navigate('/users')}
+              className="w-full text-left px-4 py-3 rounded-xl text-white hover:bg-white/10 transition-all duration-300 flex items-center gap-3"
+            >
+              <span className="text-xl">👥</span>
+              <span className="font-medium">Users</span>
+            </button>
+          )}
+          {hasAccess('categories') && (
+            <button
+              onClick={() => navigate('/categories')}
+              className="w-full text-left px-4 py-3 rounded-xl text-white hover:bg-white/10 transition-all duration-300 flex items-center gap-3"
+            >
+              <span className="text-xl">📂</span>
+              <span className="font-medium">Categories</span>
+            </button>
+          )}
+          {hasAccess('posts') && (
+            <button
+              onClick={() => navigate('/posts')}
+              className="w-full text-left px-4 py-3 rounded-xl text-white hover:bg-white/10 transition-all duration-300 flex items-center gap-3"
+            >
+              <span className="text-xl">📝</span>
+              <span className="font-medium">Posts</span>
+            </button>
+          )}
+          {hasAccess('orders') && (
+            <button
+              onClick={() => navigate('/orders')}
+              className="w-full text-left px-4 py-3 rounded-xl text-white hover:bg-white/10 transition-all duration-300 flex items-center gap-3"
+            >
+              <span className="text-xl">🛒</span>
+              <span className="font-medium">Orders</span>
+            </button>
+          )}
+        </nav>
+        
+        <div className="mt-auto pt-6 border-t border-white/10">
           <button
-            onClick={() => navigate('/users')}
-            className="text-left px-4 py-2 rounded hover:bg-gray-100 transition"
+            onClick={handleLogout}
+            className="w-full text-left px-4 py-3 rounded-xl text-red-300 hover:bg-red-500/10 transition-all duration-300 flex items-center gap-3"
           >
-            Users
+            <span className="text-xl">🚪</span>
+            <span className="font-medium">Logout</span>
           </button>
-        )}
-        {hasAccess('categories') && (
-          <button
-            onClick={() => navigate('/categories')}
-            className="text-left px-4 py-2 rounded hover:bg-gray-100 transition"
-          >
-            Categories
-          </button>
-        )}
-        {hasAccess('posts') && (
-          <button
-            onClick={() => navigate('/posts')}
-            className="text-left px-4 py-2 rounded hover:bg-gray-100 transition"
-          >
-            Posts
-          </button>
-        )}
-        {hasAccess('orders') && (
-          <button
-            onClick={() => navigate('/orders')}
-            className="text-left px-4 py-2 rounded hover:bg-gray-100 transition"
-          >
-            Orders
-          </button>
-        )}
-        <button
-          onClick={handleLogout}
-          className="text-left px-4 py-2 rounded hover:bg-gray-100 transition"
-        >
-          Logout
-        </button>
+        </div>
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 p-6 overflow-y-auto">
+      <div className="flex-1 p-8 overflow-y-auto animate-fade-in">
 
         {/* Modals */}
         {viewUser && <UserViewModal user={viewUser} onClose={() => setViewUser(null)} />}
